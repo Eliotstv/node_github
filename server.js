@@ -23,7 +23,7 @@ app.get('/todo/form',function(req,res){
     
 });
 
-//récupérer les inputs du form
+//récupérer les inputs du formulaire
 app.get('/todo/new',function(req,res){
     let item = req.query.todoItem;
     console.log(item);
