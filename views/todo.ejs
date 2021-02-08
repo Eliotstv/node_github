@@ -1,0 +1,25 @@
+<head>
+    <title>Todo list</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <h1>Liste to do</h1>
+    <ul>
+        <!--une boucle-->
+        <% for(var i = 0 ; i < listetodo.length; i++) {%>
+        <!--une interpolation juste en dessous-->
+            <li><%= listetodo[i]%></li>
+        <%} %>
+        
+    </ul>
+
+
+    <form method="get" action='/todo/new'>
+    <input type="text" name="todoItem">
+    <input type="submit" value="sauver">
+    
+    </form>
+</body>
+
+</html>
