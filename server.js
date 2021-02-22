@@ -2,62 +2,61 @@ const { request } = require('express');
 let express = require('express');
 let app = express();
 
-//je déclare la fonction to do
-let todo = ["tondre la pelouse","sortir le chien"];
 
-//set route
-app.get('/',(request,response) => {
-   //response.send("Hello World");
-    response.render('home.ejs',{name: "Paul"});
+//je déclare la fonction to do
+let todo = ["tondre la pelouse","sortir le chien","manger de la pizza"];
+
+
+app.get('/todo',function(req,res) {
+    res.render('todo.ejs',{listetodo: todo});
 })
 
-//nouvelle url donc app.get, avec ce chemin to do j'ai une fonction
-//j'envois la listetodo et je reprends la variable todo
-app.get('/todo',function(req,res){
-    res.render('todo.ejs',{listetodo: todo});
-});
+//mon body est utilisable
+app.use(express.urlencoded());
 
-//envoyer le formulaire
-app.get('/todo/form',function(req,res){
-    res.render('todoform.ejs');
+//je push le todoItem dans la liste todo
+app.post('/', (request,response) => {
+    console.log(request.body);
+    todo.push(request.body.todoItem);
+    //response.send(request.body.todoItem + " est ajouté");
+    response.redirect('/todo');
+    
     
 });
 
-//récupérer les inputs du formulaire
-app.get('/todo/new',function(req,res){
-    let item = req.query.todoItem;
-    console.log(item);
-    todo.push(item);
+app.get('/todo/:i',(req, res) => {
+    let i = req.params.i;
+    todo.splice(i, 1);
     res.redirect('/todo');
-
 });
 
 
 
 
+ 
 
 
 
 
 
 
+//let routes = require('./mesroutes');
+//app.use('/',routes);
 
 
+ //nouvelle url donc app.get, avec ce chemin to do j'ai une fonction
+ //j'envois la listetodo et je reprends la variable todo
+// app.get('/todo',function(req,res){
+  //   res.render('todo.ejs',{listetodo: todo});
+ //});
+
+ //envoyer le formulaire
+ //app.get('/todo/form',function(req,res){
+ //    res.render('todoform.ejs');
+    
+ //});
 
 
-
-
-//using url
-app.get('/index', (request, response) => {
-    //response.send('Bonjour ' + request.query.name);
-    response.render('home.ejs',{name: request.query.name});
-})
-
-//using param
-app.get('/index/:name', (request, response) => {
-    //response.send('Bonjour ' + request.params.name);
-    response.render('home.ejs',{name: request.params.name});
-})
 
 app.use(express.static('public'));
 

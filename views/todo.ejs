@@ -5,21 +5,21 @@
 
 <body>
     <h1>Liste to do</h1>
+   
     <ul>
         <!--une boucle-->
-        <% for(var i = 0 ; i < listetodo.length; i++) {%>
+        <% for( var i = 0 ; i < listetodo.length; i++) { %>
         <!--une interpolation juste en dessous-->
-            <li><%= listetodo[i]%></li>
-        <%} %>
+            <li><%= listetodo[i] %> <a href="/todo/<%=i%>">Supprimer</a> </li>
+        <% } %>
         
     </ul>
-
-
-    <form method="get" action='/todo/new'>
+    
+    <form action="/" method="POST">
     <input type="text" name="todoItem">
     <input type="submit" value="sauver">
-    
     </form>
+
 </body>
 
 </html>
