@@ -1,40 +1,31 @@
 let express = require('express');
 let router = express.Router();
 
-router.get('/',(req,res) => {
-          res.render('form.ejs');
-      })
+//je déclare la fonction to do
+let todo = ["tondre la pelouse","sortir le chien","manger de la pizza"];
+
+router.get('/todo',function(req,res) {
+    res.render('todo.ejs',{listetodo: todo});
+})
+
+//mon body est utilisable
+router.use(express.urlencoded());
+
+//je push le todoItem dans la liste todo
+router.post('/', (request,response) => {
+    console.log(request.body);
+    todo.push(request.body.todoItem);
+    //response.send(request.body.todoItem + " est ajouté");
+    response.redirect('/todo');
     
-router.post('/',(req,res) => {
-         console.log(req.body);
-         res.send("Hello " + req.body.myname);
-    })
-
-    // //set route
-router.get('/',(request,response) => {
-    //response.send("Hello World");
-     response.render('home.ejs',{name: "Paul"});
- })
-
- //nouvelle url donc app.get, avec ce chemin to do j'ai une fonction
- //j'envois la listetodo et je reprends la variable todo
- router.get('/todo',function(req,res){
-     res.render('todo.ejs',{listetodo: todo});
- });
-
-//  //envoyer le formulaire
-//  router.get('/todo/form',function(req,res){
-//      res.render('todoform.ejs');
     
-//  });
+});
 
-//  //récupérer les inputs du formulaire
-//  router.get('/todo/new',function(req,res){
-//      let item = req.query.todoItem;
-//      console.log(item);
-//      todo.push(item);
-//      res.redirect('/todo');
+router.get('/todo/:i',(req, res) => {
+    let i = req.params.i;
+    todo.splice(i, 1);
+    res.redirect('/todo');
+});
 
-//  });
 
-//  module.exports = router;
+module.exports = router;
