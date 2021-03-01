@@ -1,6 +1,16 @@
 let express = require('express');
 let router = express.Router();
 
+let userController = require('./controllers/userController');
+
+router.get('/user', userController.userList);
+
+router.get('/',(req,res) => res.redirect('/user') );
+
+router.get('/user/add', userController.userFormAdd);
+
+router.post('/user/new',userController.userNew);
+
 //je déclare la fonction to do
 let todo = ["tondre la pelouse","sortir le chien","manger de la pizza"];
 
@@ -15,8 +25,9 @@ router.use(express.urlencoded());
 router.post('/', (request,response) => {
     console.log(request.body);
     todo.push(request.body.todoItem);
-    //response.send(request.body.todoItem + " est ajouté");
     response.redirect('/todo');
+    response.send(request.body.todoItem + " est ajouté");
+    
     
     
 });
@@ -26,6 +37,8 @@ router.get('/todo/:i',(req, res) => {
     todo.splice(i, 1);
     res.redirect('/todo');
 });
+
+
 
 
 module.exports = router;
