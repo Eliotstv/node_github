@@ -10,6 +10,7 @@ app.use(express.urlencoded({extended:true}));
 let routes = require('./mesroutes');
 app.use('/', routes);
 
+
 // app.get('/todo',function(req,res) {
 //     res.render('todo.ejs',{listetodo: todo});
 // })
