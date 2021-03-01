@@ -2,10 +2,9 @@ const { request, urlencoded } = require('express');
 let express = require('express');
 let app = express();
 
-let router = require('./mesroutes');
-app.use('/', router);
-
 app.use(express.urlencoded({extended:true}));
+
+
 
 let routes = require('./mesroutes');
 app.use('/', routes);
