@@ -9,7 +9,7 @@ router.get('/',(req,res) => res.redirect('/user') );
 
 router.get('/user/add', userController.userFormAdd);
 
-router.post('/user/new',userController.userNew);
+router.post('/user/new', userController.userNew);
 
 //je déclare la fonction to do
 let todo = ["tondre la pelouse","sortir le chien","manger de la pizza"];
