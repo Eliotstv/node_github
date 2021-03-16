@@ -15,6 +15,8 @@ router.get('/user/add', userController.userFormAdd);
 
 router.post('/user/new', userController.userNew);
 
+router.post('/user/update', userController.userUpdate);
+
 router.get('/user/update/:iduser', userController.userUpdate);
 
 //je déclare la fonction to do
